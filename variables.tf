@@ -4,16 +4,21 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "create_aws_vpc" {
+  description = "Do you want to create new VPC ? default is false"
+  type        = bool
+  default     = false
+}
+
 variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC"
   type        = string
-  default     = ""
 }
 
 variable "vpc_instance_tenancy" {
   description = "A tenancy option for instances launched into the VPC. Default is default, which makes your instances shared on the host. Using either of the other options (dedicated or host) costs at least $2/hr."
   type        = string
-  default     = ""
+  default     = "default"
 }
 
 variable "vpc_enable_dns_support" {
@@ -40,16 +45,20 @@ variable "tags" {
   default     = {}
 }
 
+variable "create_aws_subnet" {
+  description = "Do you want to create a new subnet ? default is false"
+  type        = bool
+  default     = false
+}
+
 variable "vpc_id" {
   description = "The VPC ID."
   type        = string
-  default     = ""
 }
 
 variable "subnet_cidr_block" {
   description = "The CIDR block for the subnet."
   type        = string
-  default     = ""
 }
 
 variable "subnet_AZ" {

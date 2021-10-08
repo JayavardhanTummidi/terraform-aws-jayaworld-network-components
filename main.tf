@@ -4,6 +4,7 @@ provider "aws" {
 
 # Create a VPC resource
 resource "aws_vpc" "jayaworld-aws-vpc" {
+  count                            = var.create_aws_vpc ? 1 : 0
   cidr_block                       = var.vpc_cidr_block
   instance_tenancy                 = var.vpc_instance_tenancy
   enable_dns_support               = var.vpc_enable_dns_support
@@ -14,6 +15,7 @@ resource "aws_vpc" "jayaworld-aws-vpc" {
 
 # Create Subnets
 resource "aws_subnet" "jayaworld-aws-subnets" {
+  count                           = var.create_aws_subnet ? 1 : 0
   vpc_id                          = var.vpc_id
   cidr_block                      = var.subnet_cidr_block
   availability_zone               = var.subnet_AZ
