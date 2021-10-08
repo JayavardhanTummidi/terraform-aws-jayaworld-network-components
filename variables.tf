@@ -55,25 +55,25 @@ variable "create_aws_subnet" {
 variable "vpc_id" {
   description = "The VPC ID."
   type        = string
-  default = ""
+  default     = ""
 }
 
-variable "subnet_cidr_block" {
+variable "subnet_cidr_blocks" {
   description = "The CIDR block for the subnet."
-  type        = string
-  default = ""
+  type        = list(string)
+  default     = []
 }
 
-variable "subnet_AZ" {
+variable "subnet_AZS" {
   description = "The AZ for the subnet."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
-variable "subnet_AZ_ID" {
+variable "subnet_AZ_IDS" {
   description = "The AZ ID of the subnet."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 variable "enable_subnet_public_ip" {
