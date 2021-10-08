@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-# Creates a VPC resource
+# Create a VPC resource
 resource "aws_vpc" "jayaworld-aws-vpc" {
   cidr_block                       = var.vpc_cidr_block
   instance_tenancy                 = var.vpc_instance_tenancy
@@ -12,7 +12,7 @@ resource "aws_vpc" "jayaworld-aws-vpc" {
   tags                             = merge(var.tags)
 }
 
-# Creates Subnets
+# Create Subnets
 resource "aws_subnet" "jayaworld-aws-subnets" {
   vpc_id                          = var.vpc_id
   cidr_block                      = var.subnet_cidr_block
