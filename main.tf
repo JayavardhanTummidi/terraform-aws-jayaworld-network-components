@@ -19,7 +19,7 @@ resource "aws_subnet" "jayaworld-aws-subnets" {
   vpc_id                          = var.vpc_id
   cidr_block                      = var.subnet_cidr_blocks[count.index]
   availability_zone               = var.subnet_azs
-  availability_zone_id            = var.subnet_az_ids
+  availability_zone_id            = var.subnet_azs
   map_public_ip_on_launch         = var.enable_subnet_public_ip
   assign_ipv6_address_on_creation = var.enable_subnet_ipv6_creation
   ipv6_cidr_block                 = var.subnet_ipv6_cidr_block
