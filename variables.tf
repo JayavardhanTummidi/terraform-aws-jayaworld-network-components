@@ -64,16 +64,16 @@ variable "subnet_cidr_blocks" {
   default     = []
 }
 
-variable "subnet_AZS" {
-  description = "The AZ for the subnet."
-  type        = list(string)
-  default     = []
+variable "subnet_azs" {
+  description = "The AZ's for the subnet."
+  type        = string
+  default     = ""
 }
 
-variable "subnet_AZ_IDS" {
-  description = "The AZ ID of the subnet."
-  type        = list(string)
-  default     = []
+variable "subnet_az_ids" {
+  description = "The AZ ID's of the subnet."
+  type        = string
+  default     = ""
 }
 
 variable "enable_subnet_public_ip" {
