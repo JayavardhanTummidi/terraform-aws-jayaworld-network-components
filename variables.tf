@@ -1,0 +1,101 @@
+variable "region" {
+  description = "specify region name"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "vpc_cidr_block" {
+  description = "The CIDR block for the VPC"
+  type        = string
+  default     = null
+}
+
+variable "vpc_instance_tenancy" {
+  description = "A tenancy option for instances launched into the VPC. Default is default, which makes your instances shared on the host. Using either of the other options (dedicated or host) costs at least $2/hr."
+  type        = string
+  default     = ""
+}
+
+variable "vpc_enable_dns_support" {
+  description = "A boolean flag to enable/disable DNS support in the VPC. Defaults true."
+  type        = bool
+  default     = true
+}
+
+variable "vpc_enable_dns_hostnames" {
+  description = "A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false."
+  type        = bool
+  default     = false
+}
+
+variable "vpc_enable_assign_generated_ipv6_cidr_block" {
+  description = "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is false."
+  type        = bool
+  default     = false
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level"
+  type        = map(string)
+  default     = {}
+}
+
+variable "vpc_id" {
+  description = "The VPC ID."
+  type        = string
+  default     = null
+}
+
+variable "subnet_cidr_block" {
+  description = "The CIDR block for the subnet."
+  type        = string
+  default     = null
+}
+
+variable "subnet_AZ" {
+  description = "The AZ for the subnet."
+  type        = string
+  default     = ""
+}
+
+variable "subnet_AZ_ID" {
+  description = "The AZ ID of the subnet."
+  type        = string
+  default     = ""
+}
+
+variable "enable_subnet_public_ip" {
+  description = "Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false."
+  type        = bool
+  default     = false
+}
+
+variable "enable_subnet_ipv6_creation" {
+  description = "Specify true to indicate that network interfaces created in the specified subnet should be assigned an IPv6 address. Default is false"
+  type        = bool
+  default     = false
+}
+
+variable "subnet_ipv6_cidr_block" {
+  description = "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length."
+  type        = string
+  default     = ""
+}
+
+variable "map_customer_ip_for_subnets" {
+  description = "Specify true to indicate that network interfaces created in the subnet should be assigned a customer owned IP address. The customer_owned_ipv4_pool and outpost_arn arguments must be specified when set to true. Default is false."
+  type        = bool
+  default     = false
+}
+
+variable "customer_ip_address" {
+  description = "The customer owned IPv4 address pool. Typically used with the map_customer_owned_ip_on_launch argument. The outpost_arn argument must be specified when configured."
+  type        = string
+  default     = ""
+}
+
+variable "customer_outpost_arn" {
+  description = "The Amazon Resource Name (ARN) of the Outpost."
+  type        = string
+  default     = ""
+}
