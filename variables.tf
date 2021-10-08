@@ -66,14 +66,8 @@ variable "subnet_cidr_blocks" {
 
 variable "subnet_azs" {
   description = "The AZ's for the subnet."
-  type        = string
-  default     = ""
-}
-
-variable "subnet_az_ids" {
-  description = "The AZ ID's of the subnet."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 variable "enable_subnet_public_ip" {
@@ -90,8 +84,8 @@ variable "enable_subnet_ipv6_creation" {
 
 variable "subnet_ipv6_cidr_block" {
   description = "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 variable "map_customer_ip_for_subnets" {
