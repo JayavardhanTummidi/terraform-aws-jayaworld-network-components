@@ -13,6 +13,7 @@ variable "create_aws_vpc" {
 variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC"
   type        = string
+  default     = ""
 }
 
 variable "vpc_instance_tenancy" {
@@ -54,11 +55,13 @@ variable "create_aws_subnet" {
 variable "vpc_id" {
   description = "The VPC ID."
   type        = string
+  default = ""
 }
 
 variable "subnet_cidr_block" {
   description = "The CIDR block for the subnet."
   type        = string
+  default = ""
 }
 
 variable "subnet_AZ" {
