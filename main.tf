@@ -10,7 +10,7 @@ resource "aws_vpc" "jayaworld-aws-vpc" {
   enable_dns_support               = var.vpc_enable_dns_support
   enable_dns_hostnames             = var.vpc_enable_dns_hostnames
   assign_generated_ipv6_cidr_block = var.vpc_enable_assign_generated_ipv6_cidr_block
-  tags                             = merge(var.tags)
+  tags                             = merge(var.vpc_tags)
 }
 
 # Create Subnets
@@ -26,5 +26,5 @@ resource "aws_subnet" "jayaworld-aws-subnets" {
   map_customer_owned_ip_on_launch = var.map_customer_ip_for_subnets
   customer_owned_ipv4_pool        = var.customer_ip_address
   outpost_arn                     = var.customer_outpost_arn
-  tags                            = merge(var.tags)
+  tags                            = merge(var.subnet_tags)
 }

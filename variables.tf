@@ -40,7 +40,7 @@ variable "vpc_enable_assign_generated_ipv6_cidr_block" {
   default     = false
 }
 
-variable "tags" {
+variable "vpc_tags" {
   description = "A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level"
   type        = map(string)
   default     = {}
@@ -110,4 +110,10 @@ variable "customer_outpost_arn" {
   description = "The Amazon Resource Name (ARN) of the Outpost."
   type        = string
   default     = ""
+}
+
+variable "subnet_tags" {
+  description = "A map of tags to assign to the resource. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level"
+  type        = map(string)
+  default     = {}
 }
