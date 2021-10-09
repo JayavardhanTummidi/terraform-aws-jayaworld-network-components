@@ -67,7 +67,7 @@ variable "subnet_cidr_blocks" {
 variable "subnet_azs" {
   description = "The AZ's for the subnet."
   type        = list(string)
-  default     = []
+  default     = ["us-east-1a"]
 }
 
 variable "enable_subnet_public_ip" {
