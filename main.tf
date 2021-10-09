@@ -21,7 +21,7 @@ resource "aws_subnet" "jayaworld-aws-subnets" {
   availability_zone               = var.subnet_azs[count.index]
   map_public_ip_on_launch         = var.enable_subnet_public_ip
   assign_ipv6_address_on_creation = var.enable_subnet_ipv6_creation
-  ipv6_cidr_block                 = var.subnet_ipv6_cidr_block[count.index]
+  ipv6_cidr_block                 = var.subnet_ipv6_cidr_block
   map_customer_owned_ip_on_launch = var.map_customer_ip_for_subnets
   customer_owned_ipv4_pool        = var.customer_ip_address
   outpost_arn                     = var.customer_outpost_arn

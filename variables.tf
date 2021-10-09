@@ -84,8 +84,8 @@ variable "enable_subnet_ipv6_creation" {
 
 variable "subnet_ipv6_cidr_block" {
   description = "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = "::/64"
 }
 
 variable "map_customer_ip_for_subnets" {
