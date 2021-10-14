@@ -17,8 +17,8 @@ resource "aws_vpc" "jayaworld-aws-vpc" {
 resource "aws_subnet" "jayaworld-aws-subnets" {
   count                           = var.create_aws_subnet ? 1 : 0
   vpc_id                          = var.vpc_id
-  cidr_block                      = var.subnet_cidr_blocks[count.index]
-  availability_zone               = var.subnet_azs[count.index]
+  cidr_block                      = element(concat(var.subnet_cidr_blocks, [""]), count.index)
+  availability_zone               = element(concat(var.subnet_azs, [""]), count.index)
   map_public_ip_on_launch         = var.enable_subnet_public_ip
   assign_ipv6_address_on_creation = var.enable_subnet_ipv6_creation
   ipv6_cidr_block                 = var.subnet_ipv6_cidr_block
