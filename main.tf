@@ -15,7 +15,7 @@ resource "aws_vpc" "jayaworld-aws-vpc" {
 
 # Create Subnets
 resource "aws_subnet" "jayaworld-aws-subnets" {
-  count                           = var.create_aws_subnet ? 1 : 0
+  count                           = length(var.subnet_cidr_blocks) > 0 && (length(var.subnet_cidr_blocks) >= length (var.subnet_azs)) ? length(var.subnet_cidr_blocks) : 0
   vpc_id                          = var.vpc_id
   cidr_block                      = element(concat(var.subnet_cidr_blocks, [""]), count.index)
   availability_zone               = element(concat(var.subnet_azs, [""]), count.index)
