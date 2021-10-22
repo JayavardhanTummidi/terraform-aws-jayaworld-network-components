@@ -46,12 +46,6 @@ variable "vpc_tags" {
   default     = {}
 }
 
-variable "create_aws_subnet" {
-  description = "Do you want to create a new subnet ? default is false"
-  type        = bool
-  default     = false
-}
-
 variable "vpc_id" {
   description = "The VPC ID."
   type        = string
@@ -111,3 +105,104 @@ variable "subnet_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "route" {
+  description = "A list of route objects. Their keys are documented below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified"
+  type        = list(any)
+  default     = []
+}
+
+variable "igw_tags" {
+  description = "internet gateway tags"
+  type        = map(string)
+  default = {
+    Name = "Jayaworld-igw"
+  }
+}
+
+variable "rt_tags" {
+  description = "route table tags"
+  type        = map(string)
+  default = {
+    Name = "Jayaworld-rt"
+  }
+}
+
+variable "route_table_id" {
+  description = "The ID of the routing table"
+  type        = string
+  default     = ""
+}
+
+variable "route_destination_cidr_block" {
+  description = "The destination CIDR block."
+  type        = string
+  default     = ""
+}
+
+variable "route_destination_ipv6_cidr_block" {
+  description = "The destination IPv6 CIDR block."
+  type        = string
+  default     = null
+}
+
+variable "route_carrier_gateway_id" {
+  description = "Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone."
+  type        = string
+  default     = ""
+}
+
+variable "route_egress_only_gateway_id" {
+  description = " Identifier of a VPC Egress Only Internet Gateway."
+  type        = string
+  default     = ""
+}
+
+variable "route_gateway_id" {
+  description = "Identifier of a VPC internet gateway or a virtual private gateway."
+  type        = string
+  default     = ""
+}
+
+variable "route_instance_id" {
+  description = "Identifier of an EC2 instance."
+  type        = string
+  default     = ""
+}
+
+variable "route_nat_gateway_id" {
+  description = "Identifier of a VPC NAT gateway."
+  type        = string
+  default     = ""
+}
+
+variable "route_local_gateway_id" {
+  description = "Identifier of a Outpost local gateway."
+  type        = string
+  default     = ""
+}
+
+variable "route_network_interface_id" {
+  description = "Identifier of an EC2 network interface."
+  type        = string
+  default     = ""
+}
+
+variable "route_transit_gateway_id" {
+  description = "Identifier of an EC2 Transit Gateway."
+  type        = string
+  default     = ""
+}
+
+variable "route_vpc_endpoint_id" {
+  description = "Identifier of a VPC Endpoint."
+  type        = string
+  default     = ""
+}
+
+variable "route_vpc_peering_connection_id" {
+  description = "Identifier of a VPC peering connection."
+  type        = string
+  default     = ""
+}
+
