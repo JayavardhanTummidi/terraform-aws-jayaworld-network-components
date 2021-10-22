@@ -30,12 +30,14 @@ resource "aws_subnet" "jayaworld-aws-subnets" {
 
 # Create Internet Gateway
 resource "aws_internet_gateway" "jayaworld-aws-igw" {
+  count  = var.create_internet_gateway ? 1 : 0
   vpc_id = var.vpc_id
   tags   = merge(var.igw_tags)
 }
 
 # Create Route Table
 resource "aws_route_table" "jayaworld-aws-rt" {
+  count  = var.create_route_table ? 1 : 0
   vpc_id = var.vpc_id
   route  = var.route
   tags   = merge(var.rt_tags)

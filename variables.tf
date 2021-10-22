@@ -106,6 +106,18 @@ variable "subnet_tags" {
   default     = {}
 }
 
+variable "create_internet_gateway" {
+  description = "Do you want to create internet gateway ? "
+  type        = bool
+  default     = false
+}
+
+variable "create_route_table" {
+  description = "Do you want to create route table ? "
+  type        = bool
+  default     = false
+}
+
 variable "route" {
   description = "A list of route objects. Their keys are documented below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified"
   type        = list(any)
