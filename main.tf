@@ -41,9 +41,10 @@ resource "aws_route_table" "jayaworld-aws-rt" {
   vpc_id = var.vpc_id
   dynamic "route" {
     for_each = var.route == null ? [] : var.route
+
     content {
-      cidr_block = lookup(cidr_block.value, "cidr_block", null)
-      gateway_id = lookup(gateway_id, "gateway_id", null)
+      cidr_block = lookup(route.value, "cidr_block", null)
+      gateway_id = lookup(route.value, "gateway_id", null)
     }
   }
   tags = merge(var.rt_tags)
