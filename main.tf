@@ -39,11 +39,17 @@ resource "aws_internet_gateway" "jayaworld-aws-igw" {
 resource "aws_route_table" "jayaworld-aws-rt" {
   count  = var.create_route_table ? 1 : 0
   vpc_id = var.vpc_id
-  route  = var.route
-  tags   = merge(var.rt_tags)
+  dynamic "route" {
+    for_each = var.route == null ? [] : var.route
+    content {
+      cidr_block = lookup(cidr_block.value, "cidr_block", null)
+      gateway_id = lookup(gateway_id, "gateway_id", null)
+    }
+  }
+  tags = merge(var.rt_tags)
 }
 
-# Edit Routes in the route table
+/*# Edit Routes in the route table
 resource "aws_route" "jayaworld-aws-route" {
   route_table_id = var.route_table_id
   # Route Destinations
@@ -60,4 +66,4 @@ resource "aws_route" "jayaworld-aws-route" {
   #transit_gateway_id        = var.route_transit_gateway_id
   #vpc_endpoint_id           = var.route_vpc_endpoint_id
   #vpc_peering_connection_id = var.route_vpc_peering_connection_id
-}
+}*/
