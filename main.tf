@@ -43,28 +43,23 @@ resource "aws_route_table" "jayaworld-aws-rt" {
     for_each = var.route == null ? [] : var.route
 
     content {
+      #destination arguments
       cidr_block = lookup(route.value, "cidr_block", null)
+      ipv6_cidr_block = lookup(route.value, "ipv6_cidr_block", null)
+      destination_prefix_list_id = lookup(route.value, "destination_prefix_list_id", null)
+      
+      #target arguments
+      carrier_gateway_id = lookup(route.value, "carrier_gateway_id", null)
+      egress_only_gateway_id = lookup(route.value, "egress_only_gateway_id", null)
       gateway_id = lookup(route.value, "gateway_id", null)
+      instance_id = lookup(route.value, "instance_id", null)
+      local_gateway_id = lookup(route.value, "local_gateway_id", null)
+      nat_gateway_id = lookup(route.value, "nat_gateway_id", null)
+      network_interface_id = lookup(route.value, "network_interface_id", null)
+      transit_gateway_id = lookup(route.value, "transit_gateway_id", null)
+      vpc_endpoint_id = lookup(route.value, "vpc_endpoint_id", null)
+      vpc_peering_connection_id = lookup(route.value, "vpc_peering_connection_id", null)
     }
   }
   tags = merge(var.rt_tags)
 }
-
-/*# Edit Routes in the route table
-resource "aws_route" "jayaworld-aws-route" {
-  route_table_id = var.route_table_id
-  # Route Destinations
-  destination_cidr_block      = var.route_destination_cidr_block
-  destination_ipv6_cidr_block = var.route_destination_ipv6_cidr_block
-  # Route Targets
-  #carrier_gateway_id        = var.route_carrier_gateway_id
-  #egress_only_gateway_id    = var.route_egress_only_gateway_id
-  #gateway_id                = var.route_gateway_id
-  #instance_id               = var.route_instance_id
-  #nat_gateway_id            = var.route_nat_gateway_id
-  local_gateway_id = var.route_local_gateway_id
-  #network_interface_id      = var.route_network_interface_id
-  #transit_gateway_id        = var.route_transit_gateway_id
-  #vpc_endpoint_id           = var.route_vpc_endpoint_id
-  #vpc_peering_connection_id = var.route_vpc_peering_connection_id
-}*/
