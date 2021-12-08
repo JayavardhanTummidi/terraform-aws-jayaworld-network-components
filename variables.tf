@@ -233,6 +233,6 @@ variable "subnet_id" {
 variable "gateway_id" {
   description = "Provide gateway id"
   type        = string
-  default     = ""
+  default     = null
 }
 
