@@ -218,3 +218,21 @@ variable "route_vpc_peering_connection_id" {
   default     = ""
 }
 
+variable "create_route_table_association" {
+  description = "Do you want to create route table association ? "
+  type        = bool
+  default     = false
+}
+
+variable "subnet_id" {
+  description = "Provide subnet ids"
+  type        = string
+  default     = ""
+}
+
+variable "gateway_id" {
+  description = "Provide gateway id"
+  type        = string
+  default     = ""
+}
+
