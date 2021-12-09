@@ -71,3 +71,18 @@ resource "aws_route_table_association" "jayaworld-aws-rt-association" {
   subnet_id      = var.subnet_id
   gateway_id     = var.gateway_id
 }
+
+# Create EIP for NAT gateway
+resource "aws_eip" "jayaworld-aws-eip" {
+  count = var.create_elastic_ip ? 1 : 0
+  vpc   = true
+}
+
+# Create NAT gateway public to allow instances from private subnets to communicate with internet
+resource "aws_nat_gateway" "jayaworld-aws-nat-gateway" {
+  count             = var.create_nat_gateway ? 1 : 0
+  allocation_id     = aws_eip.jayaworld-aws-eip[count.index].id
+  connectivity_type = "public"
+  subnet_id         = var.subnet_id
+  tags              = merge(var.nat_tags)
+}

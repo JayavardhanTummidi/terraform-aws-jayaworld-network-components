@@ -236,3 +236,22 @@ variable "gateway_id" {
   default     = null
 }
 
+variable "nat_tags" {
+  description = "nat tags"
+  type        = map(string)
+  default = {
+    Name = "Jayaworld-nat"
+  }
+}
+
+variable "create_nat_gateway" {
+  description = "Create nat gateway ? "
+  type = bool
+  default = false
+}
+
+variable "create_elastic_ip" {
+  description = "Create elastic ip ? "
+  type = bool
+  default = false
+}
