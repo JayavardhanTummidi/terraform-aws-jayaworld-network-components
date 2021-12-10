@@ -68,7 +68,7 @@ resource "aws_route_table" "jayaworld-aws-rt" {
 resource "aws_route_table_association" "jayaworld-aws-rt-association" {
   count          = var.create_route_table_association ? 1 : 0
   route_table_id = var.route_table_id
-  subnet_id      = var.subnet_id
+  subnet_id      = var.rt_subnet_id
   gateway_id     = var.gateway_id
 }
 
@@ -83,6 +83,29 @@ resource "aws_nat_gateway" "jayaworld-aws-nat-gateway" {
   count             = var.create_nat_gateway ? 1 : 0
   allocation_id     = aws_eip.jayaworld-aws-eip[count.index].id
   connectivity_type = "public"
-  subnet_id         = var.subnet_id
+  subnet_id         = var.nat_subnet_id
   tags              = merge(var.nat_tags)
+}
+
+# Create routes to the existing route table
+resource "aws_route" "jayaworld-aws-route" {
+  count          = var.create_aws_routes ? 1 : 0
+  route_table_id = var.route_table_id
+  # Destination
+  destination_cidr_block      = var.route_destination_cidr_block
+  destination_ipv6_cidr_block = var.route_destination_ipv6_cidr_block
+  destination_prefix_list_id  = var.destination_prefix_list_id
+
+  # Target
+  carrier_gateway_id        = var.route_carrier_gateway_id
+  egress_only_gateway_id    = var.route_egress_only_gateway_id
+  gateway_id                = var.route_gateway_id
+  instance_id               = var.route_instance_id
+  nat_gateway_id            = var.route_nat_gateway_id
+  local_gateway_id          = var.route_local_gateway_id
+  network_interface_id      = var.route_network_interface_id
+  transit_gateway_id        = var.route_transit_gateway_id
+  vpc_endpoint_id           = var.route_vpc_endpoint_id
+  vpc_peering_connection_id = var.route_vpc_peering_connection_id
+
 }
