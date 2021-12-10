@@ -196,6 +196,12 @@ variable "route_table_id" {
   default     = ""
 }
 
+variable "route_table_id_association" {
+  description = "route table id for subnets association"
+  type        = string
+  default     = ""
+}
+
 variable "route_destination_cidr_block" {
   description = "The destination CIDR block."
   type        = string

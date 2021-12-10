@@ -67,7 +67,7 @@ resource "aws_route_table" "jayaworld-aws-rt" {
 # Create Route table subnets associations
 resource "aws_route_table_association" "jayaworld-aws-rt-association" {
   count          = var.create_route_table_association ? 1 : 0
-  route_table_id = var.route_table_id
+  route_table_id = var.route_table_id_association
   subnet_id      = var.rt_subnet_id
   gateway_id     = var.gateway_id
 }
