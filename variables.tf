@@ -338,13 +338,13 @@ variable "sg_tags" {
   }
 }
 
-variable "sg_ingress_rules" {
+variable "ingress" {
   description = "SG ingress rules"
   type        = list(any)
   default     = []
 }
 
-variable "sg_egress_rules" {
+variable "egress" {
   description = "SG egress rules"
   type        = list(any)
   default     = []

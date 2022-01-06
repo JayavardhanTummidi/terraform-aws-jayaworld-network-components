@@ -161,34 +161,34 @@ resource "aws_security_group" "jayaworld-security-group" {
   tags        = merge(var.sg_tags)
 
   dynamic "ingress" {
-    for_each = var.sg_ingress_rules == null ? [] : var.sg_ingress_rules
+    for_each = var.ingress == null ? [] : var.ingress
 
     content {
-      from_port        = lookup(sg_ingress_rules.value, "from_port", null)
-      to_port          = lookup(sg_ingress_rules.value, "to_port", null)
-      protocol         = lookup(sg_ingress_rules.value, "protocol", null)
-      cidr_blocks      = lookup(sg_ingress_rules.value, "cidr_blocks", null)
-      description      = lookup(sg_ingress_rules.value, "description", null)
-      ipv6_cidr_blocks = lookup(sg_ingress_rules.value, "ipv6_cidr_blocks", null)
-      prefix_list_ids  = lookup(sg_ingress_rules.value, "prefix_list_ids", null)
-      security_groups  = lookup(sg_ingress_rules.value, "security_groups", null)
-      self             = lookup(sg_ingress_rules.value, "self", null)
+      from_port        = lookup(ingress.value, "from_port", null)
+      to_port          = lookup(ingress.value, "to_port", null)
+      protocol         = lookup(ingress.value, "protocol", null)
+      cidr_blocks      = lookup(ingress.value, "cidr_blocks", null)
+      description      = lookup(ingress.value, "description", null)
+      ipv6_cidr_blocks = lookup(ingress.value, "ipv6_cidr_blocks", null)
+      prefix_list_ids  = lookup(ingress.value, "prefix_list_ids", null)
+      security_groups  = lookup(ingress.value, "security_groups", null)
+      self             = lookup(ingress.value, "self", null)
     }
   }
 
   dynamic "egress" {
-    for_each = var.sg_egress_rules == null ? [] : var.sg_egress_rules
+    for_each = var.egress == null ? [] : var.egress
 
     content {
-      from_port        = lookup(sg_egress_rules.value, "from_port", null)
-      to_port          = lookup(sg_egress_rules.value, "to_port", null)
-      protocol         = lookup(sg_egress_rules.value, "protocol", null)
-      cidr_blocks      = lookup(sg_egress_rules.value, "cidr_blocks", null)
-      description      = lookup(sg_egress_rules.value, "description", null)
-      ipv6_cidr_blocks = lookup(sg_egress_rules.value, "ipv6_cidr_blocks", null)
-      prefix_list_ids  = lookup(sg_egress_rules.value, "prefix_list_ids", null)
-      security_groups  = lookup(sg_egress_rules.value, "security_groups", null)
-      self             = lookup(sg_egress_rules.value, "self", null)
+      from_port        = lookup(egress.value, "from_port", null)
+      to_port          = lookup(egress.value, "to_port", null)
+      protocol         = lookup(egress.value, "protocol", null)
+      cidr_blocks      = lookup(egress.value, "cidr_blocks", null)
+      description      = lookup(egress.value, "description", null)
+      ipv6_cidr_blocks = lookup(egress.value, "ipv6_cidr_blocks", null)
+      prefix_list_ids  = lookup(egress.value, "prefix_list_ids", null)
+      security_groups  = lookup(egress.value, "security_groups", null)
+      self             = lookup(egress.value, "self", null)
 
     }
   }
