@@ -109,3 +109,88 @@ resource "aws_route" "jayaworld-aws-route" {
   vpc_peering_connection_id = var.route_vpc_peering_connection_id
 
 }
+
+#Create Networking ACL
+resource "aws_network_acl" "jayaworld-acl" {
+  count      = var.create_aws_network_acl ? 1 : 0
+  vpc_id     = var.vpc_id
+  subnet_ids = var.subnet_ids
+
+  dynamic "ingress" {
+    for_each = var.acl_ingress_rules == null ? [] : var.acl_ingress_rules
+
+    content {
+      from_port       = lookup(acl_ingress_rules.value, "from_port", null)
+      to_port         = lookup(acl_ingress_rules.value, "to_port", null)
+      rule_no         = lookup(acl_ingress_rules.value, "rule_no", null)
+      action          = lookup(acl_ingress_rules.value, "action", null)
+      protocol        = lookup(acl_ingress_rules.value, "protocol", null)
+      cidr_block      = lookup(acl_ingress_rules.value, "cidr_block", null)
+      ipv6_cidr_block = lookup(acl_ingress_rules.value, "ipv6_cidr_block", null)
+      icmp_type       = lookup(acl_ingress_rules.value, "icmp_type", null)
+      icmp_code       = lookup(acl_ingress.rules.value, "icmp_code", null)
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.acl_egress_rules == null ? [] : var.acl_egress_rules
+
+    content {
+      from_port       = lookup(acl_ingress_rules.value, "from_port", null)
+      to_port         = lookup(acl_ingress_rules.value, "to_port", null)
+      rule_no         = lookup(acl_ingress_rules.value, "rule_no", null)
+      action          = lookup(acl_ingress_rules.value, "action", null)
+      protocol        = lookup(acl_ingress_rules.value, "protocol", null)
+      cidr_block      = lookup(acl_ingress_rules.value, "cidr_block", null)
+      ipv6_cidr_block = lookup(acl_ingress_rules.value, "ipv6_cidr_block", null)
+      icmp_type       = lookup(acl_ingress_rules.value, "icmp_type", null)
+      icmp_code       = lookup(acl_ingress.rules.value, "icmp_code", null)
+    }
+  }
+
+  tags = merge(var.acl_tags)
+
+}
+
+#Creating security group rules
+resource "aws_security_group" "jayaworld-security-group" {
+  count       = var.create_security_group ? 1 : 0
+  name        = var.security_group_name
+  description = var.sg_description
+  vpc_id      = var.vpc_id
+  tags        = merge(var.sg_tags)
+
+  dynamic "ingress" {
+    for_each = var.sg_ingress_rules == null ? [] : var.sg_ingress_rules
+
+    content {
+      from_port        = lookup(sg_ingress_rules.value, "from_port", null)
+      to_port          = lookup(sg_ingress_rules.value, "to_port", null)
+      protocol         = lookup(sg_ingress_rules.value, "protocol", null)
+      cidr_blocks      = lookup(sg_ingress_rules.value, "cidr_blocks", null)
+      description      = lookup(sg_ingress_rules.value, "description", null)
+      ipv6_cidr_blocks = lookup(sg_ingress_rules.value, "ipv6_cidr_blocks", null)
+      prefix_list_ids  = lookup(sg_ingress_rules.value, "prefix_list_ids", null)
+      security_groups  = lookup(sg_ingress_rules.value, "security_groups", null)
+      self             = lookup(sg_ingress_rules.value, "self", null)
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.sg_egress_rules == null ? [] : var.sg_egress_rules
+
+    content {
+      from_port        = lookup(sg_egress_rules.value, "from_port", null)
+      to_port          = lookup(sg_egress_rules.value, "to_port", null)
+      protocol         = lookup(sg_egress_rules.value, "protocol", null)
+      cidr_blocks      = lookup(sg_egress_rules.value, "cidr_blocks", null)
+      description      = lookup(sg_egress_rules.value, "description", null)
+      ipv6_cidr_blocks = lookup(sg_egress_rules.value, "ipv6_cidr_blocks", null)
+      prefix_list_ids  = lookup(sg_egress_rules.value, "prefix_list_ids", null)
+      security_groups  = lookup(sg_egress_rules.value, "security_groups", null)
+      self             = lookup(sg_egress_rules.value, "self", null)
+
+    }
+  }
+}
+

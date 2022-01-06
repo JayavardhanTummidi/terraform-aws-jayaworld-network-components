@@ -279,3 +279,73 @@ variable "route_vpc_peering_connection_id" {
   type        = string
   default     = null
 }
+
+variable "create_aws_network_acl" {
+  description = "Do you want to create network acl"
+  type        = bool
+  default     = false
+}
+
+variable "subnet_ids" {
+  description = "List of subnet id's"
+  type        = list(string)
+  default     = []
+}
+
+variable "acl_ingress_rules" {
+  description = "list of Network ACL ingress rules"
+  type        = list(any)
+  default     = []
+}
+
+variable "acl_egress_rules" {
+  description = "List of Network ACL egress rules"
+  type        = list(any)
+  default     = []
+}
+
+variable "acl_tags" {
+  description = "ACL tags"
+  type        = map(string)
+  default = {
+    Name = "Jayaworld-Network-ACL-rules"
+  }
+}
+
+variable "create_security_group" {
+  description = "Do you want to create security group ? "
+  type        = bool
+  default     = false
+}
+
+variable "security_group_name" {
+  description = "Name of the security group. If omitted, Terraform will assign a random, unique name"
+  type        = string
+  default     = ""
+}
+
+variable "sg_description" {
+  description = "Security group description. Defaults to Managed by Terraform"
+  type        = string
+  default     = "Managed by Terraform"
+}
+
+variable "sg_tags" {
+  description = "security group tags"
+  type        = map(string)
+  default = {
+    Name = "jayaworld-sg-tags"
+  }
+}
+
+variable "sg_ingress_rules" {
+  description = "SG ingress rules"
+  type        = list(any)
+  default     = []
+}
+
+variable "sg_egress_rules" {
+  description = "SG egress rules"
+  type        = list(any)
+  default     = []
+}
