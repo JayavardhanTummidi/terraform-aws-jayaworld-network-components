@@ -117,62 +117,18 @@ resource "aws_network_acl" "jayaworld-acl" {
   subnet_ids = var.subnet_ids
 
   dynamic "ingress" {
-    for_each = var.acl_ingress_rules == null ? [] : var.acl_ingress_rules
-
-    content {
-      from_port       = lookup(acl_ingress_rules.value, "from_port", null)
-      to_port         = lookup(acl_ingress_rules.value, "to_port", null)
-      rule_no         = lookup(acl_ingress_rules.value, "rule_no", null)
-      action          = lookup(acl_ingress_rules.value, "action", null)
-      protocol        = lookup(acl_ingress_rules.value, "protocol", null)
-      cidr_block      = lookup(acl_ingress_rules.value, "cidr_block", null)
-      ipv6_cidr_block = lookup(acl_ingress_rules.value, "ipv6_cidr_block", null)
-      icmp_type       = lookup(acl_ingress_rules.value, "icmp_type", null)
-      icmp_code       = lookup(acl_ingress.rules.value, "icmp_code", null)
-    }
-  }
-
-  dynamic "egress" {
-    for_each = var.acl_egress_rules == null ? [] : var.acl_egress_rules
-
-    content {
-      from_port       = lookup(acl_ingress_rules.value, "from_port", null)
-      to_port         = lookup(acl_ingress_rules.value, "to_port", null)
-      rule_no         = lookup(acl_ingress_rules.value, "rule_no", null)
-      action          = lookup(acl_ingress_rules.value, "action", null)
-      protocol        = lookup(acl_ingress_rules.value, "protocol", null)
-      cidr_block      = lookup(acl_ingress_rules.value, "cidr_block", null)
-      ipv6_cidr_block = lookup(acl_ingress_rules.value, "ipv6_cidr_block", null)
-      icmp_type       = lookup(acl_ingress_rules.value, "icmp_type", null)
-      icmp_code       = lookup(acl_ingress.rules.value, "icmp_code", null)
-    }
-  }
-
-  tags = merge(var.acl_tags)
-
-}
-
-#Creating security group rules
-resource "aws_security_group" "jayaworld-security-group" {
-  count       = var.create_security_group ? 1 : 0
-  name        = var.security_group_name
-  description = var.sg_description
-  vpc_id      = var.vpc_id
-  tags        = merge(var.sg_tags)
-
-  dynamic "ingress" {
     for_each = var.ingress == null ? [] : var.ingress
 
     content {
-      from_port        = lookup(ingress.value, "from_port", null)
-      to_port          = lookup(ingress.value, "to_port", null)
-      protocol         = lookup(ingress.value, "protocol", null)
-      cidr_blocks      = lookup(ingress.value, "cidr_blocks", null)
-      description      = lookup(ingress.value, "description", null)
-      ipv6_cidr_blocks = lookup(ingress.value, "ipv6_cidr_blocks", null)
-      prefix_list_ids  = lookup(ingress.value, "prefix_list_ids", null)
-      security_groups  = lookup(ingress.value, "security_groups", null)
-      self             = lookup(ingress.value, "self", null)
+      from_port       = lookup(ingress.value, "from_port", null)
+      to_port         = lookup(ingress.value, "to_port", null)
+      rule_no         = lookup(ingress.value, "rule_no", null)
+      action          = lookup(ingress.value, "action", null)
+      protocol        = lookup(ingress.value, "protocol", null)
+      cidr_block      = lookup(ingress.value, "cidr_block", null)
+      ipv6_cidr_block = lookup(ingress.value, "ipv6_cidr_block", null)
+      icmp_type       = lookup(ingress.value, "icmp_type", null)
+      icmp_code       = lookup(ingress.value, "icmp_code", null)
     }
   }
 
@@ -180,17 +136,20 @@ resource "aws_security_group" "jayaworld-security-group" {
     for_each = var.egress == null ? [] : var.egress
 
     content {
-      from_port        = lookup(egress.value, "from_port", null)
-      to_port          = lookup(egress.value, "to_port", null)
-      protocol         = lookup(egress.value, "protocol", null)
-      cidr_blocks      = lookup(egress.value, "cidr_blocks", null)
-      description      = lookup(egress.value, "description", null)
-      ipv6_cidr_blocks = lookup(egress.value, "ipv6_cidr_blocks", null)
-      prefix_list_ids  = lookup(egress.value, "prefix_list_ids", null)
-      security_groups  = lookup(egress.value, "security_groups", null)
-      self             = lookup(egress.value, "self", null)
-
+      from_port       = lookup(egress.value, "from_port", null)
+      to_port         = lookup(egress.value, "to_port", null)
+      rule_no         = lookup(egress.value, "rule_no", null)
+      action          = lookup(egress.value, "action", null)
+      protocol        = lookup(egress.value, "protocol", null)
+      cidr_block      = lookup(egress.value, "cidr_block", null)
+      ipv6_cidr_block = lookup(egress.value, "ipv6_cidr_block", null)
+      icmp_type       = lookup(egress.value, "icmp_type", null)
+      icmp_code       = lookup(egress.value, "icmp_code", null)
     }
   }
+
+  tags = merge(var.acl_tags)
+
 }
+
 
